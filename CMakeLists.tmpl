@@ -7,6 +7,13 @@ find_package(DeLua 5.4 REQUIRED)
 set(CMAKE_INSTALL_PREFIX ${DeLua_PREFIX} CACHE PATH "Installation prefix (from DeLua)." FORCE)
 DeLua_PROGDIR(DeLua_CACHEDIR "cache/lua")
 
+# include(FetchContent)
+
+# FetchContent_Declare(luafilesystem 
+#     GIT_REPOSITORY "https://github.com/lunarmodules/luafilesystem") 
+
+# FetchContent_MakeAvailable(luafilesystem)
+
 include(ExternalProject)
 
 ExternalProject_Add(luafilesystem
@@ -18,11 +25,9 @@ ExternalProject_Add(luafilesystem
     INSTALL_COMMAND ""
 ) 
 
-set(luafilesystem_SOURCE_DIR ${DeLua_CACHEDIR}/src/luafilesystem)
-
 add_library(lfs MODULE
-    ${luafilesystem_SOURCE_DIR}/src/lfs.h
-    ${luafilesystem_SOURCE_DIR}/src/lfs.c
+    ${DeLua_CACHEDIR}/src/luafilesystem/src/lfs.h
+    ${DeLua_CACHEDIR}/src/luafilesystem/src/lfs.c
 )
 set_target_properties(lfs
     PROPERTIES
@@ -31,7 +36,4 @@ set_target_properties(lfs
 target_link_libraries(lfs DeLua::Library::C) 
 
 install(TARGETS lfs 
-    LIBRARY DESTINATION ${DeLua_CPATH_DIR} COMPONENT "runtime")
-
-install(DIRECTORY ${luafilesystem_SOURCE_DIR}/docs
-    DESTINATION ${DeLua_DOCDIR}/luafilesystem COMPONENT "documentation")
+    LIBRARY DESTINATION ${DeLua_PREFIX}/${DeLua_CPATH_DIR})
