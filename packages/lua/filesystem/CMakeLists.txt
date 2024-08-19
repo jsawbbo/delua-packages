@@ -24,6 +24,7 @@ add_library(lfs MODULE
     ${luafilesystem_SOURCE_DIR}/src/lfs.h
     ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
+add_dependencies(lfs luafilesystem)
 set_target_properties(lfs
     PROPERTIES
         PREFIX ""
