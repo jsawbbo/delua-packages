@@ -25,7 +25,7 @@ target_sources(lfs
 )
 
 install(TARGETS lfs 
-    LIBRARY DESTINATION ${DeLua_CDIR} COMPONENT "runtime")
+    LIBRARY DESTINATION ${LUA_CDIR} COMPONENT "runtime")
 
 install(DIRECTORY ${PAM_CACHEDIR}/luafilesystem/docs
     DESTINATION ${DeLua_DOCDIR}/luafilesystem COMPONENT "documentation")
