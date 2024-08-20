@@ -1,17 +1,16 @@
 cmake_minimum_required(VERSION 3.16)
 
-include(FetchContent)
-FetchContent_Declare(luafilesystem
-    PREFIX "${PAM_CACHEDIR}"
-    GIT_REPOSITORY "https://github.com/lunarmodules/luafilesystem"
-    GIT_PROGRESS ON
-) 
-FetchContent_MakeAvailable(luafilesystem)
-
 project(LuaFileSystem
     LANGUAGES C)
 
 find_package(DeLua 5.4 REQUIRED)
+
+include(FetchContent)
+FetchContent_Populate(luafilesystem
+    GIT_REPOSITORY "https://github.com/lunarmodules/luafilesystem"
+    GIT_PROGRESS ON
+    SOURCE_DIR "${PAM_CACHEDIR}/luafilesystem"
+) 
 
 add_library(lfs MODULE)
 set_target_properties(lfs
